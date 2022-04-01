@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity 0.8.9;
+pragma solidity 0.8.10;
 
 abstract contract Ownable {
     address private _owner;
@@ -18,10 +18,6 @@ abstract contract Ownable {
     modifier onlyOwner() {
         require(owner() == msg.sender, "Ownable: caller is not the owner");
         _;
-    }
- 
-    function renounceOwnership() public virtual onlyOwner {
-        _transferOwnership(address(0));
     }
  
     function transferOwnership(address newOwner) public virtual onlyOwner {
@@ -164,11 +160,6 @@ contract ROXToken is IERC20, Ownable{
         _afterTokenTransfer(from, to, amount);
     }
 
-    function mintingRoxiToken(address account, uint256 amount) public onlyOwner {
-        require(_totalSupply + amount <= _totalSupply, "Cap Exceeded!");
-        _mint(account, amount);
-    }
-
     function burningRoxiToken(address account, uint256 amount) public onlyOwner {
         _burn(account, amount);
     }
@@ -240,4 +231,5 @@ contract ROXToken is IERC20, Ownable{
         uint256 amount
     ) private {}
     
-} 
+}
+ 
